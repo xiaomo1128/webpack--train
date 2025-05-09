@@ -1,0 +1,62 @@
+.account-app {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.account-sidebar {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.account-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.account-menu li {
+  margin-bottom: 10px;
+}
+
+.account-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.account-menu a:hover {
+  background-color: #e9ecef;
+}
+
+.account-menu a.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.account-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .account-layout {
+    display: flex;
+    gap: 20px;
+  }
+
+  .account-sidebar {
+    width: 250px;
+    margin-bottom: 0;
+  }
+
+  .account-content {
+    flex: 1;
+  }
+}

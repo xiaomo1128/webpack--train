@@ -1,0 +1,92 @@
+/* 全局应用样式 */
+.app-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* 亮色主题 */
+.app-container.light {
+  --bg-color: #f8f9fa;
+  --text-color: #333;
+  --primary-color: #007bff;
+  --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* 暗色主题 */
+.app-container.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --primary-color: #3b9cff;
+  --border-color: #444;
+  --card-bg: #2a2a2a;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 150px);
+}
+
+/* 首页样式 */
+.home-page {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.feature {
+  width: 30%;
+  min-width: 250px;
+  margin: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-bg);
+}
+
+/* 404页面样式 */
+.not-found-page {
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.back-to-home {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.back-to-home:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}

@@ -1,0 +1,91 @@
+.profile-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-right: 20px;
+}
+
+.profile-info h2 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+}
+
+.profile-info p {
+  margin: 0;
+  color: #666;
+}
+
+.profile-details {
+  margin-bottom: 20px;
+}
+
+.profile-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-profile-btn,
+.change-password-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.edit-profile-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.change-password-btn {
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.edit-profile-btn:hover {
+  background-color: #0069d9;
+}
+
+.change-password-btn:hover {
+  background-color: #e9ecef;
+}

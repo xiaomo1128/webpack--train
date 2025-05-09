@@ -1,0 +1,23 @@
+.remote-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 300px;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+}
+  
+.remote-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  
+.remote-card h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+  
+.remote-card p {
+    color: #666;
+}
