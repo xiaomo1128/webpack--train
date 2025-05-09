@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { fetchProductById } from "../api/productApi";
 import "./ProductDetailPage.css";
 
 const ProductDetailPage = () => {
   const { productId } = useParams();
-  const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,23 +23,19 @@ const ProductDetailPage = () => {
   }, [productId]);
 
   const handleAddToCart = () => {
-    try {
-      // 尝试直接调用cart模块的addToCart action
-      import("cart/store")
-        .then(({ addToCart }) => {
-          dispatch(addToCart({ product, quantity: 1 }));
-          window.__MFE_EVENT_BUS__?.emit("product-added-to-cart", product);
-        })
-        .catch((err) => {
-          // 如果直接导入失败，就通过事件总线通知
-          console.warn("无法直接调用购物车模块:", err);
-          window.__MFE_EVENT_BUS__?.emit("add-to-cart", {
-            product,
-            quantity: 1,
-          });
-        });
-    } catch (error) {
-      console.error("添加到购物车失败:", error);
+    // 使用事件总线进行通信
+    if (window.__MFE_EVENT_BUS__ && product) {
+      // 发送添加购物车事件
+      window.__MFE_EVENT_BUS__.emit("add-to-cart", {
+        product,
+        quantity: 1,
+      });
+
+      // 发送产品已添加通知
+      window.__MFE_EVENT_BUS__.emit("product-added-to-cart", product);
+      console.log("已通过事件总线发送添加购物车事件");
+    } else {
+      console.error("事件总线未初始化或产品数据未加载");
     }
   };
 

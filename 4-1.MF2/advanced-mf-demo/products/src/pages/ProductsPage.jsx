@@ -6,7 +6,15 @@ import "./ProductsPage.css";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.products.filter);
+  const filter = useSelector(
+    (state) =>
+      state.products?.filter || {
+        category: "all",
+        minPrice: 0,
+        maxPrice: 1000,
+        searchTerm: "",
+      }
+  );
   const [searchInput, setSearchInput] = useState(filter.searchTerm || "");
 
   const handleCategoryChange = (e) => {

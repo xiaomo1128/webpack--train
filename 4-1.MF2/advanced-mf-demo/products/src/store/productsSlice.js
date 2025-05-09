@@ -58,9 +58,15 @@ const productsSlice = createSlice({
 export const { setFilter, resetFilter } = productsSlice.actions;
 
 // 选择器
-export const selectAllProducts = (state) => state.products.items;
+export const selectAllProducts = (state) => state.products?.items || [];
 export const selectFilteredProducts = (state) => {
-  const { items, filter } = state.products;
+  if (!state.products) return [];
+
+  const {
+    items = [],
+    filter = { category: "all", minPrice: 0, maxPrice: 1000, searchTerm: "" },
+  } = state.products;
+
   return items.filter((product) => {
     const matchesCategory =
       filter.category === "all" || product.category === filter.category;
@@ -74,6 +80,6 @@ export const selectFilteredProducts = (state) => {
 };
 
 export const selectProductById = (state, productId) =>
-  state.products.items.find((product) => product.id === productId);
+  state.products?.items?.find((product) => product.id === productId) || null;
 
 export default productsSlice.reducer;

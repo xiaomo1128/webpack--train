@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../store/accountSlice";
+import { EventNames } from "../shared/EventContracts";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -33,21 +34,18 @@ const LoginForm = () => {
         // 登录成功，获取用户数据
         const user = resultAction.payload;
 
-        // 尝试使用 shell 的 setUser action 更新用户状态
-        try {
-          const shellActions = await import("shell/store").then(
-            (module) => module
-          );
-          dispatch(shellActions.setUser(user));
-
-          // 通知其他微前端用户已登录
-          window.__MFE_EVENT_BUS__?.emit("user-logged-in", user);
-
-          // 导航到账户页面
-          navigate("/account");
-        } catch (error) {
-          console.error("无法更新主应用用户状态", error);
+        // 通过事件总线通知其他微应用用户已登录
+        if (window.__MFE_EVENT_BUS__) {
+          try {
+            window.__MFE_EVENT_BUS__.emit(EventNames.USER_LOGGED_IN, user);
+            console.log("Account: 发送用户登录事件");
+          } catch (error) {
+            console.error("Account: 发送用户登录事件失败", error);
+          }
         }
+
+        // 导航到账户页面
+        navigate("/account");
       }
     } catch (error) {
       console.error("登录失败", error);

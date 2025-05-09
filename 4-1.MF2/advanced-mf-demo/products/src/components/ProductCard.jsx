@@ -13,26 +13,22 @@ const ProductCard = ({ product, onAddToCart }) => {
 
     if (onAddToCart) {
       onAddToCart(product);
+      return;
+    }
+
+    // 使用事件总线通信，不再尝试直接导入cart模块
+    if (window.__MFE_EVENT_BUS__) {
+      // 发送添加购物车事件
+      window.__MFE_EVENT_BUS__.emit("add-to-cart", {
+        product,
+        quantity: 1,
+      });
+
+      // 发送产品已添加通知事件
+      window.__MFE_EVENT_BUS__.emit("product-added-to-cart", product);
+      console.log("已通过事件总线发送添加购物车事件");
     } else {
-      // 尝试通过全局事件总线触发添加到购物车事件
-      try {
-        // 首先尝试直接调用cart模块的addToCart action
-        import("cart/store")
-          .then(({ addToCart }) => {
-            dispatch(addToCart({ product, quantity: 1 }));
-            window.__MFE_EVENT_BUS__?.emit("product-added-to-cart", product);
-          })
-          .catch((err) => {
-            // 如果直接导入失败，就通过事件总线通知
-            console.warn("无法直接调用购物车模块:", err);
-            window.__MFE_EVENT_BUS__?.emit("add-to-cart", {
-              product,
-              quantity: 1,
-            });
-          });
-      } catch (error) {
-        console.error("添加到购物车失败:", error);
-      }
+      console.error("事件总线未初始化");
     }
   };
 

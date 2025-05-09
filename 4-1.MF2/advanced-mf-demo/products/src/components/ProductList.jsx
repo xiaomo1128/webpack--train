@@ -6,9 +6,17 @@ import "./ProductList.css";
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectFilteredProducts);
-  const status = useSelector((state) => state.products.status);
-  const error = useSelector((state) => state.products.error);
+  const status = useSelector((state) => state.products?.status || "idle");
+  const error = useSelector((state) => state.products?.error || null);
+  
+  // 使用安全的选择器获取过滤后的产品
+  const products = useSelector((state) => {
+    // 如果products还没有准备好，返回空数组
+    if (!state.products?.items) return [];
+
+    // 否则使用选择器
+    return selectFilteredProducts(state);
+  });
 
   useEffect(() => {
     if (status === "idle") {
