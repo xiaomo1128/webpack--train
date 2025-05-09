@@ -156,6 +156,7 @@ if (window.MicroFrontendAPI?.shell.notifications) {
 2. 移除循环依赖：避免使用Module Federation直接导入微应用间的模块
 3. 设置基础设施代码：
 ```bash
+# 可抽离为公共SDK
 shared/
 ├── api/             # 自定义API契约实现
 ├── events/          # 事件总线实现
